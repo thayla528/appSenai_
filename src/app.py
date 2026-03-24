@@ -14,6 +14,7 @@ def main(page: flet.Page):
 
     # caixas de texto
 
+
     res_nome = Text()
     res_numero = Text()
     res_idade = Text()
