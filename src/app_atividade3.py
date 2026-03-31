@@ -86,8 +86,15 @@ def main(page: flet.Page):
                     input_salario,
                     input_carga_horaria,
                     input_carga_horaria_minima,
-                    btn_salvar_nome
-                ]
+                    btn_salvar_nome,
+
+                    ft.Container(
+                        theme=ft.Theme(
+                            color_scheme=ft.ColorScheme(primary=ft.Colors.PINK)
+                        ),
+
+                    ),
+                ],
             )
         )
         if page.route == "/msg":
@@ -107,6 +114,7 @@ def main(page: flet.Page):
                         input_carga_horaria_minima,
 
 
+
                     ]
                 )
             )
@@ -118,6 +126,21 @@ def main(page: flet.Page):
             page.views.remove(e.view)
             top_view = page.views[-1]
             await page.push_route(top_view.route)
+
+    async def handle_switch_change(e):
+        if page.theme_mode == ft.ThemeMode.DARK:
+            page.theme_mode = ft.ThemeMode.LIGHT
+            switch.thumb_icon = ft.Icons.LIGHT_MODE
+        else:
+            page.theme_mode = ft.ThemeMode.DARK
+            switch.thumb_icon = ft.Icons.DARK_MODE
+        await page.update_async()
+
+    switch = ft.Switch(
+        thumb_icon=ft.Icons.DARK_MODE, on_change=handle_switch_change
+    )
+
+
 
     # componentes
     text_msg = Text()
